@@ -16,7 +16,7 @@ function Crud(props) {
     const obtenerDatos = async () => {
       try {
         const db = firebase.firestore()
-        const data = await db.collection(props.user.uid).get()
+        const data = await db.collection(props.user.uid).orderBy('number', 'desc').get()
         const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
         console.log(arrayData);
         setTareas(arrayData)
@@ -122,7 +122,6 @@ function Crud(props) {
                   <button 
                     className="btn btn-warning btn-sm float-right mr-2"
                     onClick={() => activarEdicion(item)}
-
                   >Editar</button>
 
                 </li>
